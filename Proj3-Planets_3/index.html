@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Solar System</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+var solarSystem = [{
+	"name":"Mercury",
+	"image":"img/mercury.png",
+	"avgDistance":"37.43"// in millions of miles from Sun
+},{
+	"name":"Venus",
+	"image":"img/mercury.png",
+	"avgDistance":"67.69"
+},{
+	"name":"Earth",
+	"image":"img/mercury.png",
+	"avgDistance":"93"
+},{
+	"name":"Mars",
+	"image":"img/mercury.png",
+	"avgDistance":"149.1"
+},{
+	"name":"Asteroid belt",
+	"image":"img/mercury.png",
+	"avgDistance":"251"
+},{
+	"name":"Jupiter",
+	"image":"img/mercury.png",
+	"avgDistance":"504.6"
+},{
+	"name":"Saturn",
+	"image":"img/mercury.png",
+	"avgDistance":"887.8"
+},{
+	"name":"Uranus",
+	"image":"img/mercury.png",
+	"avgDistance":"1785.9"
+},{
+	"name":"Neptune",
+	"image":"img/mercury.png",
+	"avgDistance":"2795.2"
+},{
+	"name":"Kuiper Belt",
+	"image":"img/mercury.png",
+	"avgDistance":"3718"
+},{
+	"name":"Oort Cloud",
+	"image":"img/mercury.png",
+	"avgDistance":"4880180"
+}];
+
+window.onload = function(){
+	$("a.venus").click(function(){
+		alert("Oh, Venus...");
+		
+		$("div.venus img").animate({
+			top: window.innerHeight,
+		}, 2000).animate({
+			left: '-=2000'
+		}, 2000)
+	});
+	
+	function bob(){
+		$('.inner').animate({
+			top: '-=25px'
+		}, 1000).animate({
+			top: '+=25px'
+		}, 1000)
+	}
+	
+	setInterval(bob);
+	
+	
+	function dismissPlanet(){
+		$("div.Mercury").animate({
+			right:"999999"
+		}, 8000);
+	}
+	
+	function stuff(){
+		$(".inner").hide();
+		
+		var far = solarSystem[0].avgDistance * 1000;
+		$("div.Mercury").show();
+		$("div.Mercury").css("right", far);
+		//$("div.Mercury img").css("width", "100px");
+		$("div.Mercury").animate({
+			right:"0"
+		}, 4000).animate({
+			width:"1000px"
+		}, 2000);
+		//alert(solarSystem[0].name + " is " + (solarSystem[0].avgDistance * 1000000) + " miles away from your Sun.");
+		setTimeout(dismissPlanet, 8000);
+		
+	};
+	
+	stuff();
+	
+	
+	
+}
+
+</script>
+
+<style>
+body{
+	background-color:#282E33;
+	/*background-image:url(img/ecliptic.png);*/
+	font-family:sans-serif;
+}
+.inner{display:none;}
+section{
+	position:relative;
+	z-index:-1;
+}
+section div{
+	position:absolute;
+	top:-50px;
+}
+.inner{height:auto;}
+.inner img{position:relative;}
+a:link, a:visited{
+	color:#eee;
+	font-size:3em;
+	text-decoration:none;
+	z-index:1;
+}
+a:hover, a:focus{
+	color:#55F0AA;
+}
+</style>
+
+
+
+
+</head>
+
+<body>
+
+<a href="#venus" class="venus">*</a>
+<section id="slidebottom" class="slide">
+<div class="inner Mercury">
+<img src="img/mercury.png" alt="Mercury">
+</div>
+<div class="inner Venus">
+<img src="img/mercury.png" alt="Venus">
+</div>
+<div class="inner Earth">
+<img src="img/mercury.png" alt="Earth">
+</div>
+<div class="inner Mars">
+<img src="img/mercury.png" alt="Mars">
+</div>
+<div class="inner Asteroid Belt">
+<img src="img/mercury.png" alt="Asteroid Belt">
+</div>
+<div class="inner Jupiter">
+<img src="img/mercury.png" alt="Jupiter">
+</div>
+<div class="inner Saturn">
+<img src="img/mercury.png" alt="Saturn">
+</div>
+<div class="inner Uranus">
+<img src="img/mercury.png" alt="Uranus">
+</div>
+<div class="inner Neptune">
+<img src="img/mercury.png" alt="Neptune">
+</div>
+<div class="inner Kuiper Belt">
+<img src="img/mercury.png" alt="Kuiper Belt">
+</div>
+<div class="inner Oort Cloud">
+<img src="img/mercury.png" alt="Oort Cloud">
+</div>
+</section>
+
+
+
+
+</body>
+</html>

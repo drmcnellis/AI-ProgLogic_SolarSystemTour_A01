@@ -1,0 +1,361 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Solar System</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+
+
+
+var solarSystem = [
+{
+	"id":"0",
+	"name":"Mercury",
+	"image":"img/mercury.png",
+	"avgDistance":"37.43",// in millions of miles from Sun
+	"moons":"",
+	"fact":""
+},{
+	"id":"1",
+	"name":"Venus",
+	"image":"img/venus.png",
+	"avgDistance":"67.69",
+	"moons":"",
+	"fact":""
+},{
+	"id":"2",
+	"name":"Earth",
+	"image":"img/earth.png",
+	"avgDistance":"93",
+	"moons":"",
+	"fact":""
+},{
+	"id":"3",
+	"name":"Mars",
+	"image":"img/mars.png",
+	"avgDistance":"149.1",
+	"moons":"",
+	"fact":""
+},{
+	"id":"4",
+	"name":"Asteroid belt",
+	"image":"img/asteroidbelt.png",
+	"avgDistance":"251",
+	"moons":"",
+	"fact":""
+},{
+	"id":"5",
+	"name":"Jupiter",
+	"image":"img/jupiter.png",
+	"avgDistance":"504.6",
+	"moons":"",
+	"fact":""
+},{
+	"id":"6",
+	"name":"Saturn",
+	"image":"img/saturn.png",
+	"avgDistance":"887.8",
+	"moons":"",
+	"fact":""
+},{
+	"id":"7",
+	"name":"Uranus",
+	"image":"img/uranus.png",
+	"avgDistance":"1785.9",
+	"moons":"",
+	"fact":""
+},{
+	"id":"8",
+	"name":"Neptune",
+	"image":"img/neptune.png",
+	"avgDistance":"2795.2",
+	"moons":"",
+	"fact":""
+},{
+	"id":"9",
+	"name":"Kuiper Belt",
+	"image":"img/kuiperbelt.png",
+	"avgDistance":"3718",
+	"moons":"",
+	"fact":""
+}
+
+/*,{
+	"id":"10",
+	"name":"Oort Cloud",
+	"image":"img/mercury.png",
+	"avgDistance":"4880180",
+	"moons":"",
+	"fact":""
+}*/
+
+];
+
+
+
+//----------------------------------------------------------------timer stuff
+var timeSmall = 0;
+var time = 0;
+
+var myTimer;
+
+
+function tick(){
+	timeSmall++;
+	time = timeSmall/1000;
+	document.getElementById("text").innerHTML = "time (seconds): "+time;
+}
+function timer(){
+	myTimer = setInterval(tick, 1);
+}
+function timerStop(){
+	clearInterval(myTimer);
+	timeSmall = 0;
+	time = 0;
+}
+
+//----------------------------------------------------------------onload
+window.onload = function(){
+	timer();
+	var current = 0;
+	var changing = 0;
+	var ta = [0,0,0,0,0,0,0,0,0,0];
+	var t1 = 0;
+	var t2 = 0;
+	var t3 = 0;
+	
+	$(".inner").hide();
+	stuff();
+	
+	
+	$(window).click(onClick);
+	
+	function onClick(){
+		//alert("clicked");
+		changing = 1;
+	}
+	
+	function switchPlanet(){
+		
+	}
+	
+	function bob(){
+		$('.inner').animate({
+			top: '-=25px'
+		}, 1000).animate({
+			top: '+=25px'
+		}, 1000)
+	}
+	
+	var bobInt = setInterval(bob);
+	
+	
+	function dismissPlanet(){
+		/*
+		$(".inner").hide();
+		
+		var currentTrue = current%10;
+		if(current==0){
+			currentTrue = 9;
+		}
+			
+		$("div."+solarSystem[current-1].name).show();
+		$(".inner").animate({
+				right:"999999"
+			}, 8000);
+		
+		changing = 0;
+		*/
+		
+		/*
+		if(current == 0){
+			current++;
+			stuff();
+		}else{
+			$("div."+solarSystem[planetID].name).animate({
+				right:"999999"
+			}, 8000);
+			current++;
+			stuff();
+		}
+		*/
+		
+	}
+	
+	function stuff(){
+		$(".inner").hide();
+		clearInterval(bobInt);
+		if(changing == 0){
+			
+			
+			//setInterval(bob);
+			
+			//var far = solarSystem[0].avgDistance * 1000;
+			
+			$("div."+solarSystem[current].name).show();
+			
+			//$("div."+solarSystem[planetID].name).css("right", far);
+			//$("div."+solarSystem[current].name).css("right", 38000);
+			$("div."+solarSystem[current].name).css("right", 40000);
+			//$("div."+solarSystem[planetID].name+" img").css("width", "100px");
+			$("div."+solarSystem[current].name+" img").css("width", "100");
+			$("div."+solarSystem[current].name).animate({
+					right:"0"
+				}, 4000)
+						/*.animate({
+					width:"960px"
+				}, 2000)*/;
+			$("div."+solarSystem[current].name+" img").animate({
+					width:"960"
+				}, 4000);
+			//alert(solarSystem[0].name + " is " + (solarSystem[0].avgDistance * 1000000) + " miles away from your Sun.");
+			//setTimeout(dismissPlanet, 8000);
+			//setInterval(bob);
+		}else if(changing == 1){
+			$("div."+solarSystem[current].name).show();
+			dismissPlanet();
+			$(".inner").animate({
+				right:"40000px"
+			}, 8000);
+			//setTimeout(dismissPlanet, 8000);
+			//$(".inner").hide();
+			//setInterval(bob);
+			changing = 0;
+			current++;
+		}
+	} // end of stuff().............
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	$("a.venus").click(function(){
+		alert("Oh, Venus...");
+		
+		$("div.venus img").animate({
+			top: window.innerHeight,
+		}, 2000).animate({
+			left: '-=2000'
+		}, 2000)
+	});
+	*/
+	
+	
+
+};//end of window.onload = function(){}
+
+
+</script>
+
+<style>
+body{
+	background-color:#282E33;
+	background-image:url(img/ecliptic.png);
+	font-family:sans-serif;
+	overflow:hidden;
+}
+
+section{
+	position:relative;
+	z-index:-1;
+}
+section div{
+	position:absolute;
+	top:-50px;
+}
+.inner{
+	display:none;
+}
+.inner{
+	height:auto;
+}
+.inner img{
+	position:relative;	
+}
+p, a:link, a:visited{
+	display:inline-block;
+	position:relative;
+	top:0px;
+	width:420px;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+	color:#eee;
+	font-size:1.7em;
+	text-decoration:none;
+	z-index:1;
+}
+a:hover, a:focus{
+	color:#55F0AA;
+}
+</style>
+
+
+
+
+</head>
+
+<body>
+
+<!--
+	EMET Abbreviation: (?)
+____::::::::::::::::::::::::::::::::
+	Type:
+		ul>li.item$*2
+	+<TAB> Key
+	Generates:
+	    <ul>
+			<li class="item1"></li>
+				<li class="item2"></li>
+		</ul>
+¯¯¯¯::::::::::::::::::::::::::::::::
+-->
+<!--<a href="#venus" class="venus">*</a>-->
+<p id="text">*</p>
+<section id="slidebottom" class="slide">
+<div class="inner Mercury">
+<img src="img/mercury.png" alt="Mercury">
+</div>
+<div class="inner Venus">
+<img src="img/venus.png" alt="Venus">
+</div>
+<div class="inner Earth">
+<img src="img/earth.png" alt="Earth">
+</div>
+<div class="inner Mars">
+<img src="img/mars.png" alt="Mars">
+</div>
+<div class="inner Asteroid Belt">
+<img src="img/asteroidbelt.png" alt="Asteroid Belt">
+</div>
+<div class="inner Jupiter">
+<img src="img/jupiter.png" alt="Jupiter">
+</div>
+<div class="inner Saturn">
+<img src="img/saturn.png" alt="Saturn">
+</div>
+<div class="inner Uranus">
+<img src="img/uranus.png" alt="Uranus">
+</div>
+<div class="inner Neptune">
+<img src="img/neptune.png" alt="Neptune">
+</div>
+<div class="inner Kuiper Belt">
+<img src="img/kuiperbelt.png" alt="Kuiper Belt">
+</div>
+<!--<div class="inner Oort Cloud">
+<img src="img/mercury.png" alt="Oort Cloud">
+</div>-->
+</section>
+
+
+
+
+</body>
+</html>

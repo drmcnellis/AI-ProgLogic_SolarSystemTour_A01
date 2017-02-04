@@ -1,0 +1,314 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Solar System</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+
+
+
+var solarSystem = [
+{
+	"id":"0",
+	"name":"Sol",
+	"image":"img/sol.png",
+	"avgDistance":"0.0",// in millions of miles from Sun
+	"moons":"bajillions of satellites",
+	"fact":"it's around 4.6 billion years old (one-third the age of universe)"
+},{
+	"id":"1",
+	"name":"Mercury",
+	"image":"img/mercury.png",
+	"avgDistance":"37.43",// in millions of miles from Sun
+	"moons":"0",
+	"fact":"88-day year."
+},{
+	"id":"2",
+	"name":"Venus",
+	"image":"img/venus.png",
+	"avgDistance":"67.69",
+	"moons":"0",
+	"fact":"hottest planet. NOT Mercury."
+},{
+	"id":"3",
+	"name":"Earth",
+	"image":"img/earth.png",
+	"avgDistance":"93",
+	"moons":"1",
+	"fact":"rotation is gradually slowing"
+},{
+	"id":"4",
+	"name":"Mars",
+	"image":"img/mars.png",
+	"avgDistance":"149.1",
+	"moons":"2",
+	"fact":"On Mars, the Sun appears about half the size it does on Earth"
+},{
+	"id":"5",
+	"name":"Asteroid belt",
+	"image":"img/asteroidbelt.png",
+	"avgDistance":"251",
+	"moons":"billions. around 1.5 million are larger than 1km in diameter",
+	"fact":"home of largest Dwarf Planet in the inner solar system, Ceres."
+},{
+	"id":"6",
+	"name":"Jupiter",
+	"image":"img/jupiter.png",
+	"avgDistance":"504.6",
+	"moons":"67",
+	"fact":"biggest diameter. shortest day (fastest spin)."
+},{
+	"id":"7",
+	"name":"Saturn",
+	"image":"img/saturn.png",
+	"avgDistance":"887.8",
+	"moons":"62",
+	"fact":"the flattest planet, it bulges out around its equator."
+},{
+	"id":"8",
+	"name":"Uranus",
+	"image":"img/uranus.png",
+	"avgDistance":"1785.9",
+	"moons":"27",
+	"fact":"Uranus hits the coldest temperatures of any planet."
+},{
+	"id":"9",
+	"name":"Neptune",
+	"image":"img/neptune.png",
+	"avgDistance":"2795.2",
+	"moons":"14",
+	"fact":"Neptune has a very active climate and thin rings."
+},{
+	"id":"10",
+	"name":"Kuiper Belt",
+	"image":"img/kuiperbelt.png",
+	"avgDistance":"3718",
+	"moons":"billions of icy objects",
+	"fact":"Comets originate from here and further out in the Oort Cloud."
+}];// 11 objects. highest index = solarSystem[10]
+
+
+
+
+//----------------------------------------------------------------onload
+
+window.onload = function(){
+	//alert("loaded!");
+	var current = -1;
+	var str = "";
+	var stage = 0;
+	var myInt;
+	var current_prev = 0;
+	var onstage = false;
+	var jdiv;
+	var jimg;
+	
+	
+	
+	setInterval(stuff,1);
+	
+	function init(){
+		
+		$("section div.pic").css("right",40000);
+		$("section div.pic").animate({right: "200px"}, 3000);
+		
+		setTimeout(fadein,3000);
+		
+		onstage = true;
+		//setInterval(bob);
+	}
+	function dismiss(){
+		$("section div.pic").animate({right: 40000}, 2000);
+
+		onstage = false;
+		setTimeout(increment,2000);
+		init();	
+	}
+	
+	function increment(){
+		current++;
+	}
+	
+	function fadein(){
+		$('section div.text').css('opacity', 0.01);
+		$("section div.text").animate({opacity: 1.0}, 2000);	
+	}
+	
+	function stuff(){
+		
+		/*if(current != current_prev){
+			dismiss();
+		}*/
+		$('section div.pic img').attr('src', solarSystem[current].image);
+		buildStr();
+		checkStage();
+			
+		current = current%solarSystem.length;	
+		type();	
+		var current_prev = current;
+	}
+	
+	function type(){
+		
+		//$("section div.text").html(buildStr());
+		$("section div.text").html(str);
+	}
+	
+	
+	$(window).click(onClick);
+	function onClick(){
+		//if(current==-1 || current==(solarSystem.length-1)){
+		/*if(current==-1){
+			current = 0;
+			init();
+		}else{*/
+		$('section div.text').css('opacity', 1.0);
+		$("section div.text").animate({opacity: "0.01"}, 500);
+				
+			dismiss();
+			
+			
+		//}
+		//alert("stage = "+stage+". current = "+current+". <br>loc = " + solarSystem[current].image + " ... ");
+		//current = stage%3;
+		
+	}
+	
+	
+	function checkStage(){
+		
+	}
+	
+	
+	
+	function buildStr(){
+		/*str = "<p><span>Name:</span> " + solarSystem[current].name + "</p><p><span>Avg Distance from Sun: </span> "+solarSystem[current].avgDistance+" (in millions of miles)</p><p><span># of Moons/Satelites: </span> "+solarSystem[current].moons+"</p><p><span>Fun Fact: </span> "+solarSystem[current].fact+"</p>";*/
+		str = "<p><span>Name:</span> " + solarSystem[current].name + "<br><span>Avg Distance from Sun: </span> "+solarSystem[current].avgDistance+" (in millions of miles)<br><span># of Moons/Satelites: </span> "+solarSystem[current].moons+"<br><span>Fun Fact: </span> "+solarSystem[current].fact+"</p>";
+		return str;
+		
+	}
+	
+	function clearStr(){
+		str = "";
+		return(str);
+	}
+	
+	setInterval(bob);
+	
+	
+	function bob(){
+		//if(onstage==true){
+		//var r = $("section div.pic").css("right");
+		//if(r<500){
+			$('section div.pic img').animate({
+				top: '+=20px'
+			}, 1000).animate({
+				top: '-=20px'
+			}, 1000);
+		//}else{
+		//	$('section div.pic').css("top",0);
+		//}
+	}
+
+
+
+
+		//$("section div.pic").animate({right: 40000}, 2000);
+		
+		
+		
+		/*
+		$("div.pic img").animate({
+			right: window.innerHeight,
+		}, 2000).animate({
+			left: '-=2000'
+		}, 2000)
+		*/
+};
+
+
+</script>
+
+<style>
+body{
+	background-color:#282E33;
+	background-image:url(img/ecliptic.png);
+	font-family:sans-serif;
+	/*overflow:hidden;*/
+}
+
+section{
+	position:relative;
+	/*background-color:#000;*/
+	left:0px;
+	width:auto;
+	z-index:-1;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+	/*height:auto;*/
+}
+section div{
+	position:absolute;
+	/*top:-50px;*/
+	/*background-color:#000;*/
+	
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+section div.pic{
+	width:960px;
+	right:40000px;
+	top:80px;
+}
+section div.text{
+	left:0px;
+	top:0px;
+}
+
+section div img{
+	position:relative;
+	top:0px;
+}
+span{
+	font-weight:bold;
+	/*color:#947F57;*/
+	/*color:#55F0AA;*/
+	color:#80D8BE;
+}
+/*.inner{
+	display:none;
+}
+.inner{
+	height:auto;
+}
+.inner img, .tim img{
+	position:relative;	
+}*/
+p, a:link, a:visited{
+	/*display:block;*/
+	/*position:relative;
+	left:15px;
+	width:auto;*/
+	margin:10 0 10 0;
+	padding:0 0 0 0;
+	line-height:1.7em;
+	color:#eee;
+	font-size:1.2em;
+	text-decoration:none;
+	/*z-index:1;*/
+}
+</style>
+</head>
+
+
+
+
+<body>
+<section>
+	<div class="text"><p><br>Welcome to the Sol System.<br><br>Click anywhere to begin...</p></div>
+	<div class="pic"><img src="img/sol.png" alt="sol"></div>
+	
+</section>
+</body>
+</html>
